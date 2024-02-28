@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/qstns.dart';
+
 class que extends StatefulWidget {
   const que({super.key});
 
@@ -7,6 +9,25 @@ class que extends StatefulWidget {
 }
 
 class _queState extends State<que> {
+  List question = [
+    Quiz(qus: 'car have 4 wheels', ans: true),
+    Quiz(qus: 'sydney is the capital of america', ans: false),
+    Quiz(qus: 'blue is the colour of the sky', ans: true),
+    Quiz(qus: 'india has 29 states', ans: false),
+    Quiz(qus: 'keerthana is a bad girl', ans: true),
+    Quiz(qus: 'diya is a good girl', ans: true),
+    Quiz(qus: 'sana has car', ans: false),
+    Quiz(qus: 'sana is a drop out student', ans: true),
+    Quiz(qus: 'hamna is a singer', ans: true),
+    Quiz(qus: 'lakshmi is a goddess', ans: false),
+  ];
+  int q_no = 0;
+  void nextquestion() {
+    if (q_no < question.length) {
+      q_no++;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,31 +36,51 @@ class _queState extends State<que> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             SizedBox(
               height: 50,
             ),
-            Text('No More Questions',
-            style: TextStyle(fontSize: 28,color: Colors.white,fontStyle: FontStyle.italic),),
-            SizedBox(height: 50,),
-
+            Text(
+              question[q_no].qus,
+              style: TextStyle(
+                  fontSize: 28,
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic),
+            ),
+            SizedBox(
+              height: 50,
+            ),
             Container(
                 height: 60,
                 width: 300,
                 child: ElevatedButton(
-                    style:ElevatedButton.styleFrom(backgroundColor: Colors.grey,foregroundColor: Colors.white),
-                    onPressed: (){}, child: Text('true'))),
-            SizedBox(height: 50,),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey,
+                        foregroundColor: Colors.white),
+                    onPressed: () {
+                      setState(() {
+                        nextquestion();
+                      });
+                    },
+                    child: Text('true'))),
+            SizedBox(
+              height: 50,
+            ),
             Container(
                 height: 60,
                 width: 300,
                 child: ElevatedButton(
-                    style:ElevatedButton.styleFrom(backgroundColor: Colors.brown,foregroundColor: Colors.white),
-                    onPressed: (){}, child: Text('false'))),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.brown,
+                        foregroundColor: Colors.white),
+                    onPressed: () {
+                      setState(() {
+                        nextquestion();
+                      });
+                    },
+                    child: Text('false'))),
           ],
         ),
       ),
-
     );
   }
 }
