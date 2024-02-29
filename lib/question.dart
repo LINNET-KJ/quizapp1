@@ -22,9 +22,19 @@ class _queState extends State<que> {
     Quiz(qus: 'lakshmi is a goddess', ans: false),
   ];
   int q_no = 0;
+  String result='';
   void nextquestion() {
     if (q_no < question.length) {
       q_no++;
+    }
+  }
+
+  void check(bool answer) {
+    print(answer);
+    if (answer == question[q_no].ans) {
+      result='correct';
+    } else {
+      result='wrong';
     }
   }
 
@@ -54,11 +64,13 @@ class _queState extends State<que> {
                 width: 300,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey,
+                        backgroundColor: Colors.green.shade100,
                         foregroundColor: Colors.white),
                     onPressed: () {
                       setState(() {
+                        check(true);
                         nextquestion();
+
                       });
                     },
                     child: Text('true'))),
@@ -74,10 +86,14 @@ class _queState extends State<que> {
                         foregroundColor: Colors.white),
                     onPressed: () {
                       setState(() {
+                        check(false);
                         nextquestion();
+
                       });
                     },
                     child: Text('false'))),
+            SizedBox(height: 20),
+            Text(result,style: TextStyle(color: Colors.white),),
           ],
         ),
       ),
